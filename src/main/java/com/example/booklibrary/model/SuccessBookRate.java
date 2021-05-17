@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class SuccessBookRate {
-    double rate;
+    private double rate;
 }
