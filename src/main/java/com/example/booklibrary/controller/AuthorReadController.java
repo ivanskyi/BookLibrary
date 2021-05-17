@@ -1,6 +1,7 @@
 package com.example.booklibrary.controller;
 
 import com.example.booklibrary.entity.Book;
+import com.example.booklibrary.model.SuccessAuthor;
 import com.example.booklibrary.model.SuccessBookRate;
 import com.example.booklibrary.service.AuthorService;
 import com.example.booklibrary.service.BookService;
@@ -15,8 +16,8 @@ import java.util.Set;
 @RestController
 public class AuthorReadController {
 
-    AuthorService authorService;
-    BookService bookService;
+    private final AuthorService authorService;
+    private final BookService bookService;
 
     public AuthorReadController(AuthorService authorService, BookService bookService) {
         this.authorService = authorService;
@@ -24,38 +25,38 @@ public class AuthorReadController {
     }
 
     @GetMapping("books/{authorName}")
-    public Set<Book> getAllBooksByAuthorName(@PathVariable(name="authorName") String authorName) {
+    public Set<Book> getAllBooksByAuthorName(@PathVariable(name = "authorName") String authorName) {
         return bookService.getAllBooksByAuthorName(authorName);
     }
 
     @GetMapping("book/most-selling/{authorName}")
-    public Book getMostSellingBookByAuthorName(@PathVariable(name="authorName") String authorName) {
+    public Book getMostSellingBookByAuthorName(@PathVariable(name = "authorName") String authorName) {
         return bookService.getMostSellingBook(authorName);
     }
 
     @GetMapping("book/most-published/{authorName}")
-    public Book getMostPublishedBook(@PathVariable(name="authorName") String authorName) {
+    public Book getMostPublishedBook(@PathVariable(name = "authorName") String authorName) {
         return bookService.getMostPublishedBook(authorName);
     }
 
-    @GetMapping("books/most-selling/")
-    public List<Book> getMostSellingBooks(@RequestParam(name="name") String authorName) {
+    @GetMapping("books/most-selling")
+    public List<Book> getMostSellingBooks(@RequestParam(name = "name") String authorName) {
         return bookService.getMostSellingBooksByPartName(authorName);
     }
 
     @GetMapping("books/most-published")
-    public List<Book> getMostPublishedBooks(@RequestParam(name="name") String authorName) {
+    public List<Book> getMostPublishedBooks(@RequestParam(name = "name") String authorName) {
         return bookService.getMostPublishedBooksByPartName(authorName);
     }
 
     @GetMapping("books/most-successful")
     public Map<Book, SuccessBookRate> getMostSuccessfulBooksByAuthorName(
-            @RequestParam(name="name") String authorName) {
+            @RequestParam(name = "name") String authorName) {
         return bookService.getMostSuccessfulBooksByPartName(authorName);
     }
 
     @GetMapping("authors/most-successful")
-    public String getMostSuccessfulAuthors() {
+    public SuccessAuthor getMostSuccessfulAuthors() {
         return bookService.getMostSuccessfulAuthor();
     }
 }

@@ -15,7 +15,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @EqualsAndHashCode
-@Table(name = "author")
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

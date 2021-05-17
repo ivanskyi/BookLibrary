@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthorService {
 
-    AuthorRepository authorRepository;
+    private final AuthorRepository authorRepository;
 
     public AuthorService(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
@@ -19,33 +19,36 @@ public class AuthorService {
 
     public Author create(AuthorDto authorDto) {
         Author author = new Author(authorDto.getId(),
-                authorDto.getAuthorName(),authorDto.getBirthDate(),
+                authorDto.getAuthorName(), authorDto.getBirthDate(),
                 authorDto.getPhone(), authorDto.getEmail());
-
+        authorRepository.save(author);
+        Author authorWhichContaineBooks = authorRepository.findByAuthorName(author.getAuthorName());
         for (Book bookDto : authorDto.getBooks()) {
-            Book book = new Book(bookDto.getAuthorId(),
-                    bookDto.getBookName(), bookDto.getAuthorId(),
+            Book book = new Book(bookDto.getBookName(), authorWhichContaineBooks.getId(),
                     bookDto.getPublishedAmount(), bookDto.getSoldAmount());
-            author.addBook(book);
+            authorWhichContaineBooks.addBook(book);
         }
-        return authorRepository.save(author);
+        return authorRepository.save(authorWhichContaineBooks);
     }
 
     public Author update(Author author) {
-        Author newAuthor  = authorRepository.findById(author.getId()).get();
-        newAuthor.setAuthorName(author.getAuthorName());
-        newAuthor.setBirthDate(author.getBirthDate());
-        newAuthor.setPhone(author.getPhone());
-        newAuthor.setEmail(author.getEmail());
-        return authorRepository.save(newAuthor);
+        if (authorRepository.findById(author.getId()).isPresent()) {
+            Author newAuthor = authorRepository.findById(author.getId()).get();
+            newAuthor.setAuthorName(author.getAuthorName());
+            newAuthor.setBirthDate(author.getBirthDate());
+            newAuthor.setPhone(author.getPhone());
+            newAuthor.setEmail(author.getEmail());
+            return authorRepository.save(newAuthor);
+        }
+        return new Author();
     }
 
-    public ResponseEntity delete(Author author) {
+    public ResponseEntity<?> delete(Author author) {
         authorRepository.delete(author);
         if (authorRepository.findById(author.getId()).isPresent()) {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 }

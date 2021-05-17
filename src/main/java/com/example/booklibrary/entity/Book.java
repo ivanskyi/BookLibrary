@@ -11,7 +11,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @EqualsAndHashCode
-@Table(name = "book")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,4 +19,11 @@ public class Book {
     private Long authorId;
     private Long publishedAmount;
     private Long soldAmount;
+
+    public Book(String bookName, Long authorId, Long publishedAmount, Long soldAmount) {
+        this.bookName = bookName;
+        this.authorId = authorId;
+        this.publishedAmount = publishedAmount;
+        this.soldAmount = soldAmount;
+    }
 }

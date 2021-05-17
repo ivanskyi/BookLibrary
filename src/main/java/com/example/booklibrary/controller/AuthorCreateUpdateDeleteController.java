@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("author")
 public class AuthorCreateUpdateDeleteController {
 
-    AuthorService authorService;
+    private final AuthorService authorService;
 
     public AuthorCreateUpdateDeleteController(AuthorService authorService) {
         this.authorService = authorService;
@@ -27,7 +27,7 @@ public class AuthorCreateUpdateDeleteController {
     }
 
     @DeleteMapping("delete")
-    public ResponseEntity delete(@RequestBody Author author) {
+    public ResponseEntity<?> delete(@RequestBody Author author) {
         return authorService.delete(author);
     }
 }

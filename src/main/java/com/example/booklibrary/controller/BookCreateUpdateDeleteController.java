@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("book")
 public class BookCreateUpdateDeleteController {
 
-    BookService bookService;
+    private final BookService bookService;
 
     public BookCreateUpdateDeleteController(BookService bookService) {
         this.bookService = bookService;
@@ -27,7 +27,7 @@ public class BookCreateUpdateDeleteController {
     }
 
     @DeleteMapping("delete")
-    public ResponseEntity delete(@RequestBody Book book) {
+    public ResponseEntity<?> delete(@RequestBody Book book) {
         return bookService.deleteBook(book);
     }
 }

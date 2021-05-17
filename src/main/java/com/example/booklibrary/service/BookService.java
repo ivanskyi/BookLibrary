@@ -3,6 +3,7 @@ package com.example.booklibrary.service;
 import com.example.booklibrary.dto.BookDto;
 import com.example.booklibrary.entity.Author;
 import com.example.booklibrary.entity.Book;
+import com.example.booklibrary.model.SuccessAuthor;
 import com.example.booklibrary.model.SuccessAuthorRate;
 import com.example.booklibrary.model.SuccessBookRate;
 import com.example.booklibrary.repository.AuthorRepository;
@@ -35,7 +36,7 @@ public class BookService {
     }
 
     public Book updateBook(Book book) {
-        if(bookRepository.findById(book.getId()).isPresent()) {
+        if (bookRepository.findById(book.getId()).isPresent()) {
             Book updatedBook = bookRepository.findById(book.getId()).get();
             updatedBook.setBookName(book.getBookName());
             updatedBook.setSoldAmount(book.getSoldAmount());
@@ -46,13 +47,11 @@ public class BookService {
         return new Book();
     }
 
-    public ResponseEntity deleteBook(Book book) {
+    public ResponseEntity<?> deleteBook(Book book) {
         bookRepository.delete(book);
-        if (bookRepository.findById(book.getId()).isPresent()) {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        } else {
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-        }
+        return bookRepository.findById(book.getId()).isPresent()
+                ? new ResponseEntity<>(HttpStatus.BAD_REQUEST)
+                : new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     public Set<Book> getAllBooksByAuthorName(String authorName) {
@@ -76,7 +75,7 @@ public class BookService {
                 .map(Author::getBooks)
                 .flatMap(Collection::stream)
                 .sorted(Comparator.comparing(Book::getSoldAmount))
-                .sorted((a,b) -> Long.compare(b.getSoldAmount(), a.getSoldAmount()))
+                .sorted((a, b) -> Long.compare(b.getSoldAmount(), a.getSoldAmount()))
                 .collect(Collectors.toList());
     }
 
@@ -85,51 +84,46 @@ public class BookService {
                 .map(Author::getBooks)
                 .flatMap(Collection::stream)
                 .sorted(Comparator.comparing(Book::getPublishedAmount))
-                .sorted((a,b) -> Long.compare(b.getPublishedAmount(), a.getPublishedAmount()))
+                .sorted((a, b) -> Long.compare(b.getPublishedAmount(), a.getPublishedAmount()))
                 .collect(Collectors.toList());
     }
 
     public Map<Book, SuccessBookRate> getMostSuccessfulBooksByPartName(String authorName) {
         Map<Book, SuccessBookRate> successfulAuthor = new HashMap<>();
-        for(Author author : authorRepository.findAllByAuthorNameContaining(authorName)) {
-            for(Book book : author.getBooks()) {
-                successfulAuthor.put(book, new SuccessBookRate(book.getSoldAmount()));
+        for (Author author : authorRepository.findAllByAuthorNameContaining(authorName)) {
+            for (Book book : author.getBooks()) {
+                successfulAuthor.put(book, new SuccessBookRate(getBookSuccessRate(book)));
             }
         }
         return successfulAuthor;
     }
 
-    public String getMostSuccessfulAuthor() {
+    public SuccessAuthor getMostSuccessfulAuthor() {
         List<Author> authors = authorRepository.findAll();
-        Map<Author, SuccessAuthorRate> successAuthorsRate= new HashMap<>();
-        for(Author author : authors) {
-            double summeRate = 0;
-            int bookCount = 0;
-            for(Book book : author.getBooks()) {
-                bookCount++;
-                summeRate += getBookSuccefessRate(book);
+        Map<Author, SuccessAuthorRate> rateSuccessAllAuthors = new HashMap<>();
+        for (Author author : authors) {
+            double ratingOfAllBooksOfTheAuthor = 0;
+            int numberOfBooks = 0;
+            for (Book book : author.getBooks()) {
+                numberOfBooks++;
+                ratingOfAllBooksOfTheAuthor += getBookSuccessRate(book);
             }
-            successAuthorsRate.put(author,new SuccessAuthorRate(summeRate / bookCount ));
+            rateSuccessAllAuthors.put(author, new SuccessAuthorRate(ratingOfAllBooksOfTheAuthor / numberOfBooks));
         }
-        String topName = "";
-        double topRate = 0.0;
-        for (Author author : successAuthorsRate.keySet()) {
-            if(successAuthorsRate.get(author).getRate() > topRate) {
-                topName = author.getAuthorName();
-                topRate = successAuthorsRate.get(author).getRate();
+        String nameAuthorWhichHasMostBigRate = "none";
+        double mostBigAuthorRate = 0.0;
+        for (Author author : rateSuccessAllAuthors .keySet()) {
+            if (rateSuccessAllAuthors.get(author).getRate() > mostBigAuthorRate) {
+                nameAuthorWhichHasMostBigRate = author.getAuthorName();
+                mostBigAuthorRate = rateSuccessAllAuthors.get(author).getRate();
             }
         }
-        return "Author name: " + topName + ", Top rate: " + topRate;
+        return new SuccessAuthor(nameAuthorWhichHasMostBigRate, mostBigAuthorRate);
     }
 
-    public double getBookSuccefessRate(Book book) {
+    public double getBookSuccessRate(Book book) {
         double rate = 0;
-        if (book.getSoldAmount() == 0 || book.getPublishedAmount() == 0) {
-            rate = 0;
-        } else {
-            rate = book.getSoldAmount() / book.getPublishedAmount() > rate
-                    ? book.getSoldAmount() / book.getPublishedAmount() : rate;
-        }
-        return rate;
+        return book.getSoldAmount() == 0 || book.getPublishedAmount() == 0 ? 0
+                : Math.max((double) book.getSoldAmount() / (double) book.getPublishedAmount(), rate);
     }
 }

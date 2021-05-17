@@ -9,7 +9,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-
 public class BookDto {
     private String bookName;
     private Long authorId;
