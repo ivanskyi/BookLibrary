@@ -184,7 +184,7 @@ user:root
 password:pass
 ```
 
-###Testing REST APIs using Postman:
+## Testing REST APIs using Postman:
 
 Use postman file which located by address: 
 ```/src/main/resources/data/postman/*.json```

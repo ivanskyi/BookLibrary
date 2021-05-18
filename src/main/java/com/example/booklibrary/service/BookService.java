@@ -2,7 +2,6 @@ package com.example.booklibrary.service;
 
 import com.example.booklibrary.dto.BookDto;
 import com.example.booklibrary.entity.Book;
-import com.example.booklibrary.repository.AuthorRepository;
 import com.example.booklibrary.repository.BookRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,8 +33,9 @@ public class BookService {
             updatedBook.setPublishedAmount(book.getPublishedAmount());
             updatedBook.setAuthorId(book.getAuthorId());
             return bookRepository.save(updatedBook);
+        } else {
+            throw new RuntimeException("We didn't update this book, because we didn't find this book.");
         }
-        return new Book();
     }
 
     public ResponseEntity<?> deleteBook(Book book) {

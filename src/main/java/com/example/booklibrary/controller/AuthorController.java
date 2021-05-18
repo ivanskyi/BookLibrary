@@ -37,7 +37,6 @@ public class AuthorController {
         return authorService.delete(author);
     }
 
-
     @GetMapping("all-books/{authorName}")
     public Set<Book> getAllBooksByAuthorName(@PathVariable(name = "authorName") String authorName) {
         return authorService.getAllBooksByAuthorName(authorName);
