@@ -8,25 +8,25 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("book")
-public class BookCreateUpdateDeleteController {
+public class BookController {
 
     private final BookService bookService;
 
-    public BookCreateUpdateDeleteController(BookService bookService) {
+    public BookController(BookService bookService) {
         this.bookService = bookService;
     }
 
-    @PostMapping("create")
+    @PostMapping
     public Book create(@RequestBody BookDto bookDto) {
         return bookService.createBook(bookDto);
     }
 
-    @PutMapping("update")
+    @PutMapping
     public Book update(@RequestBody Book book) {
         return bookService.updateBook(book);
     }
 
-    @DeleteMapping("delete")
+    @DeleteMapping
     public ResponseEntity<?> delete(@RequestBody Book book) {
         return bookService.deleteBook(book);
     }

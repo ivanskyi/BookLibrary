@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"bookName\": \"The Jungle Book\",\n    \"authorId\": 1241,\n    \"publishedAmount\": 100,\n    \"soldAmount\": 70\n}",
+							"raw": "{\n   \"bookName\":\"The Jungle Book\",\n   \"authorId\":5,\n   \"publishedAmount\":100,\n   \"soldAmount\":70\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -23,15 +23,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8083/book/create",
+							"raw": "http://localhost:8083/book",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8083",
 							"path": [
-								"book",
-								"create"
+								"book"
 							]
 						}
 					},
@@ -44,7 +43,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 1,\n    \"bookName\": \"Mowgli\",\n    \"authorId\": 1,\n    \"publishedAmount\": 110,\n    \"soldAmount\": 10\n}",
+							"raw": "{\n    \"id\": 1,\n    \"bookName\": \"The Jungle Book\",\n    \"authorId\": 6,\n    \"publishedAmount\": 150,\n    \"soldAmount\": 70\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -52,15 +51,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8083/book/update",
+							"raw": "http://localhost:8083/book",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8083",
 							"path": [
-								"book",
-								"update"
+								"book"
 							]
 						}
 					},
@@ -73,7 +71,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 1,\n    \"bookName\": \"Mowgli\",\n    \"authorId\": 1,\n    \"publishedAmount\": 110,\n    \"soldAmount\": 10\n}",
+							"raw": "{\n    \"id\": 1,\n    \"bookName\": \"The Jungle Book\",\n    \"authorId\": 6,\n    \"publishedAmount\": 150,\n    \"soldAmount\": 70\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -81,15 +79,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8083/book/delete",
+							"raw": "http://localhost:8083/book",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8083",
 							"path": [
-								"book",
-								"delete"
+								"book"
 							]
 						}
 					},
@@ -127,7 +124,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"authorName\": \"Rudyard Kipling\",\n\"birthDate\": \"1865-12-03T10:15:30\",\n\"phone\": \"+380\",\n\"email\": \"Kipling@gmail.com\",\n\"books\": [\n{\n    \"bookName\": \"Kim\",\n    \"publishedAmount\": 300,\n    \"soldAmount\": 20\n}, \n{\n    \"bookName\": \"The Cat that Walked by Himself\",\n    \"publishedAmount\": 50,\n    \"soldAmount\": 45\n},\n{\n    \"bookName\": \"Selected Poems\",\n    \"publishedAmount\": 90,\n    \"soldAmount\": 11\n}\n]\n}",
+							"raw": "{\n   \"authorName\":\"Rudyard Kipling\",\n   \"birthDate\":\"1865-12-03T10:15:30\",\n   \"phone\":\"+380\",\n   \"email\":\"Kipling@gmail.com\",\n   \"books\":[\n      {\n         \"bookName\":\"Kim\",\n         \"publishedAmount\":700,\n         \"soldAmount\":600\n      },\n      {\n         \"bookName\":\"The Cat that Walked by Himself\",\n         \"publishedAmount\":50,\n         \"soldAmount\":45\n      },\n      {\n         \"bookName\":\"Selected Poems\",\n         \"publishedAmount\":90,\n         \"soldAmount\":11\n      }\n   ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -135,15 +132,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8083/author/create",
+							"raw": "http://localhost:8083/author",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8083",
 							"path": [
-								"author",
-								"create"
+								"author"
 							]
 						}
 					},
@@ -156,7 +152,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 9,\n    \"authorName\": \"Rudyard Kipling\",\n    \"birthDate\": \"1865-12-03T10:15:30\",\n    \"phone\": \"+380765443\",\n    \"email\": \"Kipling@gmail.com\"\n}",
+							"raw": "{\n    \"id\": 1,\n    \"authorName\": \"Rudyard Kipling\",\n    \"birthDate\": \"1865-12-03T10:15:30\",\n    \"phone\": \"+3807654\",\n    \"email\": \"Kipling@gmail.com\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -164,15 +160,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8083/author/update",
+							"raw": "http://localhost:8083/author",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8083",
 							"path": [
-								"author",
-								"update"
+								"author"
 							]
 						}
 					},
@@ -185,7 +180,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 9,\n    \"authorName\": \"Rudyard Kipling\",\n    \"birthDate\": \"1865-12-03T10:15:30\",\n    \"phone\": \"+380765443\",\n    \"email\": \"Kipling@gmail.com\"\n}",
+							"raw": "{\n    \"id\": 1,\n    \"authorName\": \"Rudyard Kipling\",\n    \"birthDate\": \"1865-12-03T10:15:30\",\n    \"phone\": \"+3807654\",\n    \"email\": \"Kipling@gmail.com\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -193,15 +188,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8083/author/delete",
+							"raw": "http://localhost:8083/author",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8083",
 							"path": [
-								"author",
-								"delete"
+								"author"
 							]
 						}
 					},
@@ -235,14 +229,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8083/books/Rudyard Kipling",
+					"raw": "http://localhost:8083/author/all-books/Rudyard Kipling",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8083",
 					"path": [
-						"books",
+						"author",
+						"all-books",
 						"Rudyard Kipling"
 					]
 				}
@@ -255,16 +250,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8083/book/most-selling/Di",
+					"raw": "http://localhost:8083/author/most-selling-book/Rudyard Kipling",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8083",
 					"path": [
-						"book",
-						"most-selling",
-						"Di"
+						"author",
+						"most-selling-book",
+						"Rudyard Kipling"
 					]
 				}
 			},
@@ -276,16 +271,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8083/book/most-published/oleh",
+					"raw": "http://localhost:8083/author/most-published-book/Rudyard Kipling",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8083",
 					"path": [
-						"book",
-						"most-published",
-						"oleh"
+						"author",
+						"most-published-book",
+						"Rudyard Kipling"
 					]
 				}
 			},
@@ -297,15 +292,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8083/books/most-selling/?name=pl",
+					"raw": "http://localhost:8083/author/most-selling-books/?name=pl",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8083",
 					"path": [
-						"books",
-						"most-selling",
+						"author",
+						"most-selling-books",
 						""
 					],
 					"query": [
@@ -324,20 +319,20 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8083/books/most-published?name=pl",
+					"raw": "http://localhost:8083/author/most-published-books?name=li",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8083",
 					"path": [
-						"books",
-						"most-published"
+						"author",
+						"most-published-books"
 					],
 					"query": [
 						{
 							"key": "name",
-							"value": "pl"
+							"value": "li"
 						}
 					]
 				}
@@ -350,15 +345,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8083/books/most-successful?name=pl",
+					"raw": "http://localhost:8083/author/most-successful-books?name=pl",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8083",
 					"path": [
-						"books",
-						"most-successful"
+						"author",
+						"most-successful-books"
 					],
 					"query": [
 						{
@@ -376,14 +371,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8083/authors/most-successful",
+					"raw": "http://localhost:8083/author/most-successful",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8083",
 					"path": [
-						"authors",
+						"author",
 						"most-successful"
 					]
 				}
